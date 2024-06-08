@@ -54,3 +54,91 @@ e) INSERT INTO `library_management`.`borrowed_books` (`borrow_id`, `borrow_date`
 INSERT INTO `library_management`.`borrowed_books` (`borrow_id`, `borrow_date`, `return_date`, `book_id`, `user_id`) VALUES ('109', '2024-05-25', '2024-06-25', '103', '111');
 INSERT INTO `library_management`.`borrowed_books` (`borrow_id`, `borrow_date`, `return_date`, `book_id`, `user_id`) VALUES ('119', '2024-05-29', '2024-06-29', '102', '112');
 
+3. 
+USE hw3_schema;
+SELECT *
+FROM order_details
+INNER JOIN orders ON order_details.order_id = orders.id
+INNER JOIN customers ON orders.customer_id = customers.id
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+INNER JOIN employees ON orders.employee_id = employees.employee_id
+INNER JOIN shippers ON orders.shipper_id = shippers.id
+INNER JOIN suppliers ON products.supplier_id = suppliers.id
+
+4. 
+a) USE hw3_schema;
+SELECT COUNT(*)
+FROM order_details
+INNER JOIN orders ON order_details.order_id = orders.id
+INNER JOIN customers ON orders.customer_id = customers.id
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+INNER JOIN employees ON orders.employee_id = employees.employee_id
+INNER JOIN shippers ON orders.shipper_id = shippers.id
+INNER JOIN suppliers ON products.supplier_id = suppliers.id
+
+b) USE hw3_schema;
+SELECT COUNT(*)
+FROM order_details
+LEFT JOIN orders ON order_details.order_id = orders.id
+INNER JOIN customers ON orders.customer_id = customers.id
+INNER JOIN products ON order_details.product_id = products.id
+LEFT JOIN categories ON products.category_id = categories.id
+INNER JOIN employees ON orders.employee_id = employees.employee_id
+RIGHT JOIN shippers ON orders.shipper_id = shippers.id
+INNER JOIN suppliers ON products.supplier_id = suppliers.id
+
+Кількість рядків залишається такою ж самою, бо якщо немає відповідності певному значенню в правій чи лівій таблиці, то виводиться NULL і кількість рядків не змінюється.
+
+c) USE hw3_schema;
+SELECT *
+FROM order_details
+INNER JOIN orders ON order_details.order_id = orders.id
+INNER JOIN customers ON orders.customer_id = customers.id
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+INNER JOIN employees ON orders.employee_id = employees.employee_id
+INNER JOIN shippers ON orders.shipper_id = shippers.id
+INNER JOIN suppliers ON products.supplier_id = suppliers.id
+WHERE employees.employee_id > 3 and employees.employee_id <= 10;
+
+d) USE hw3_schema;
+SELECT categories.name as category_name,
+COUNT(*)  as row_count,
+AVG(order_details.quantity) as avg_quantity
+FROM order_details
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+GROUP BY categories.name;
+
+e) COUNT(*)  as row_count,
+AVG(order_details.quantity) as avg_quantity
+FROM order_details
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+GROUP BY categories.name
+HAVING avg_quantity > 21;
+
+f) USE hw3_schema;
+SELECT categories.name as category_name,
+COUNT(*)  as row_count,
+AVG(order_details.quantity) as avg_quantity
+FROM order_details
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+GROUP BY categories.name
+HAVING avg_quantity > 21
+ORDER BY row_count DESC;
+
+g) USE hw3_schema;
+SELECT categories.name as category_name,
+COUNT(*)  as row_count,
+AVG(order_details.quantity) as avg_quantity
+FROM order_details
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN categories ON products.category_id = categories.id
+GROUP BY categories.name
+HAVING avg_quantity > 21
+ORDER BY row_count DESC
+LIMIT 4 OFFSET 1;
