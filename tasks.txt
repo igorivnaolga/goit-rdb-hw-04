@@ -33,3 +33,24 @@ FOREIGN KEY (book_id) REFERENCES books (book_id),
 user_id INT,
 FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+
+2. 
+a) INSERT INTO `library_management`.`authors` (`author_id`, `author_name`) VALUES ('1', 'Khvylovyi');
+INSERT INTO `library_management`.`authors` (`author_id`, `author_name`) VALUES ('2', 'Pidmohylnyi');
+INSERT INTO `library_management`.`authors` (`author_id`, `author_name`) VALUES ('3', 'Zhadan');
+
+b) INSERT INTO `library_management`.`genres` (`genre_id`, `genre_name`) VALUES ('11', 'novel');
+INSERT INTO `library_management`.`genres` (`genre_id`, `genre_name`) VALUES ('22', 'drama');
+
+c) INSERT INTO `library_management`.`users` (`user_id`, `username`, `email`) VALUES ('111', 'Max', 'max@gmail.com');
+INSERT INTO `library_management`.`users` (`user_id`, `username`, `email`) VALUES ('112', 'Kira', 'kira@gmail.com');
+INSERT INTO `library_management`.`users` (`user_id`, `username`, `email`) VALUES ('113', 'Vol', 'vol@gmail.com');
+
+d) INSERT INTO `library_management`.`books` (`book_id`, `title`, `publication_year`, `author_id`, `genre_id`) VALUES ('101', 'Misto', 1928, '2', '11');
+INSERT INTO `library_management`.`books` (`book_id`, `title`, `publication_year`, `author_id`, `genre_id`) VALUES ('102', 'Arabesky', 1927, '1', '22');
+INSERT INTO `library_management`.`books` (`book_id`, `title`, `publication_year`, `author_id`, `genre_id`) VALUES ('103', 'Internat', 2017, '3', '11');
+
+e) INSERT INTO `library_management`.`borrowed_books` (`borrow_id`, `borrow_date`, `return_date`, `book_id`, `user_id`) VALUES ('99', '2024-05-20', '2024-06-20', '101', '113');
+INSERT INTO `library_management`.`borrowed_books` (`borrow_id`, `borrow_date`, `return_date`, `book_id`, `user_id`) VALUES ('109', '2024-05-25', '2024-06-25', '103', '111');
+INSERT INTO `library_management`.`borrowed_books` (`borrow_id`, `borrow_date`, `return_date`, `book_id`, `user_id`) VALUES ('119', '2024-05-29', '2024-06-29', '102', '112');
+
